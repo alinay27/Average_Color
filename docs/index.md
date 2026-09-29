@@ -19,4 +19,4 @@ pip install streamlit opencv-python-headless numpy scikit-learn matplotlib
 ```bash
 streamlit run app.py
 ```
-![Example Screenshot](indexMDscreenshot)
+![Example Screenshot](indexMDscreenshot.png)
