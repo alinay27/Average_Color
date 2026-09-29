@@ -10,5 +10,5 @@ Interactive Streamlit web app that analyzes an uploaded image (PNG, JPG, JPEG) a
 To run the application:
 
 ```bash
-streamlit run app.py
+streamlit run averageRGB.py
 ```
