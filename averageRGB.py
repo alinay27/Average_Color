@@ -17,7 +17,7 @@ if uploaded_file is not None:
 
     pixels = img_rgb.reshape(-1, 3) #reshapes 3 columns for R G B
     clt = KMeans(n_clusters = 1) 
-    clt.fit(pixels) #group into single cluster
+    clt.fit(pixels) #group into single cluster 
     avg_color = clt.cluster_centers_[0].astype(int) #find coordinates of cluster center and convert to int
 
     st.subheader("Original Image") 
