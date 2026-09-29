@@ -15,17 +15,17 @@ if uploaded_file is not None:
     img = cv2.imdecode(files_bytes, cv2.IMREAD_COLOR) 
     img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) 
 
-    pixels = img_rgb.reshape(-1, 3)
-    clt = KMeans(n_clusters = 1)
-    clt.fit(pixels)
-    avg_color = clt.cluster_centers_[0].astype(int)
+    pixels = img_rgb.reshape(-1, 3) #reshapes 3 columns for R G B
+    clt = KMeans(n_clusters = 1) 
+    clt.fit(pixels) #group into single cluster
+    avg_color = clt.cluster_centers_[0].astype(int) #find coordinates of cluster center and convert to int
 
-    st.subheader("Original Image")
+    st.subheader("Original Image") 
     st.image(img_rgb, use_container_width=True)
     st.subheader("Average Color")
 
     color_block = np.zeros((200, 400, 3), dtype=np.uint8)
-    color_block[:] = avg_color
+    color_block[:] = avg_color #fill w/ average color
     st.image(color_block, use_container_width=True)
     st.write(f"RGB: {avg_color[0]}, {avg_color[1]}, {avg_color[2]}")
     hex_color = "#{:02x}{:02x}{:02x}".format(avg_color[0], avg_color[1], avg_color[2])
