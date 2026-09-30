@@ -15,5 +15,5 @@ pip install streamlit opencv-python-headless numpy scikit-learn matplotlib
 
 ### 2. Run the Code
 ```bash
-streamlit run app.py
+streamlit run averageRGB.py
 ```
