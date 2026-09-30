@@ -10,26 +10,30 @@ st.write("This app calculates the average color of an uploaded image. Upload an 
 
 uploaded_file = st.file_uploader("Upload Image", type=["png", "jpg", "jpeg"])
 
+num_clusters = st.number_input("Enter # of clusters", value=1)
+
 if uploaded_file is not None:
     files_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
     img = cv2.imdecode(files_bytes, cv2.IMREAD_COLOR) 
     img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) 
 
     pixels = img_rgb.reshape(-1, 3) #reshapes 3 columns for R G B
-    clt = KMeans(n_clusters = 1) 
+    clt = KMeans(n_clusters = num_clusters) 
     clt.fit(pixels) #group into single cluster 
-    avg_color = clt.cluster_centers_[0].astype(int) #find coordinates of cluster center and convert to int
+    avg_colors = [cluster.astype(int) for cluster in clt.cluster_centers_] #find coordinates of cluster center and convert to int
 
     st.subheader("Original Image") 
     st.image(img_rgb, use_container_width=True)
     st.subheader("Average Color")
 
-    color_block = np.zeros((200, 400, 3), dtype=np.uint8)
-    color_block[:] = avg_color #fill w/ average color
-    st.image(color_block, use_container_width=True)
-    st.write(f"RGB: {avg_color[0]}, {avg_color[1]}, {avg_color[2]}")
-    hex_color = "#{:02x}{:02x}{:02x}".format(avg_color[0], avg_color[1], avg_color[2])
-    st.write(f"Hex: {hex_color}")
+    for avg_color in avg_colors:
+        color_block = np.zeros((200, 400, 3), dtype=np.uint8)
+        color_block[:] = avg_color #fill w/ average color
+        st.image(color_block, use_container_width=True)
+        st.write(f"RGB: {avg_color[0]}, {avg_color[1]}, {avg_color[2]}")
+        hex_color = "#{:02x}{:02x}{:02x}".format(avg_color[0], avg_color[1], avg_color[2])
+        st.write(f"Hex: {hex_color}")
+
 # fig, axes = plt.subplots(1, 2, figsize=(10, 5))#Create a figure with 1 row and 2 columns of subplots
 # axes[0].imshow(img_rgb)
 # axes[0].set_title("Original Image")
