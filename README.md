@@ -8,7 +8,7 @@ Interactive Streamlit web app that analyzes an uploaded image (PNG, JPG, JPEG) a
 * **Color Codes:** Output values are provided in both RGB and HEX formats
   
 ## To run the application:
-### 1. Ensure you have streamlit streamlit and other libraries installed:
+### 1. Ensure you have Streamlit and other libraries installed:
 ```bash
 pip install streamlit opencv-python-headless numpy scikit-learn matplotlib
 ```
